@@ -1,11 +1,17 @@
 import codecs, os, pymongo
+<<<<<<< HEAD
 from models import msg
+=======
+>>>>>>> 539166723692c174104c91dda63bda1c37cce855
 from flask import Flask, render_template, flash, redirect, url_for, session, request, logging
 from data import Articles
 from functools import wraps
 from pymongo import MongoClient
+<<<<<<< HEAD
 import time
 from time import strftime,gmtime,strptime
+=======
+>>>>>>> 539166723692c174104c91dda63bda1c37cce855
 import bcrypt
 app = Flask(__name__)
 
@@ -15,6 +21,7 @@ db=client.library
 # Index
 @app.route('/')
 def index():
+<<<<<<< HEAD
 	book = db.book
 	user = db.user
 	lend = db.lend
@@ -26,6 +33,13 @@ def index():
 @app.route('/login')
 def login():
 	return render_template('login.html')
+=======
+    return render_template('home.html',value='')
+
+@app.route('/login')
+def login():
+    return render_template('login.html')
+>>>>>>> 539166723692c174104c91dda63bda1c37cce855
 
 @app.route('/auth/login',methods=['POST','GET'])
 def login_template():
@@ -80,10 +94,17 @@ def register_template():
 		#print existing_user
 		if existing_user == None:
 			hashpass=bcrypt.hashpw(request.form['password'].encode('utf-8'),bcrypt.gensalt())
+<<<<<<< HEAD
 			#print hashpass,users
 			db['users'].insert({'uid':request.form['uid'],'name':request.form['name'],'uname':request.form['uname'],'password':hashpass,'phone':request.form['phone']})
 			session['uname']=request.form['uname']
 			#print 'inserted'
+=======
+			print hashpass,users
+			db['users'].insert({'uid':request.form['uid'],'name':request.form['name'],'uname':request.form['uname'],'password':hashpass,'phone':request.form['phone']})
+			session['uname']=request.form['uname']
+			print 'inserted'
+>>>>>>> 539166723692c174104c91dda63bda1c37cce855
 			return 'registerd as '+request.form['name']
 			return render_template('login.html')
 	return render_template('home.html',value="Invalid Passkey Contact maadhavam")
@@ -112,7 +133,11 @@ def about():
 	s=[]
 	for i in v:
 		s.append(i)
+<<<<<<< HEAD
 	#print  s
+=======
+	print  s
+>>>>>>> 539166723692c174104c91dda63bda1c37cce855
 	return render_template('about.html',values=s)
 
 
@@ -124,6 +149,7 @@ def article():
 	for i in v:
 		l.append(i)
 	return render_template('article.html',articles=l)
+<<<<<<< HEAD
 @app.route('/give',methods=['POST','GET','PULL'])
 def lend():
 	#print request.method
@@ -241,6 +267,10 @@ def msgli():
 	q.logout()
 	return render_template("msg.html",users=defaulters)
 	
+=======
+
+
+>>>>>>> 539166723692c174104c91dda63bda1c37cce855
 if __name__ == '__main__':
 	app.secret_key = 'secretkey'
 	app.run(debug=True)
